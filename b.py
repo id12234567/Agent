@@ -7,7 +7,7 @@ import time
 from pynput import keyboard
 import select
 
-# ---------- CONFIG ----------
+# ---------- CONFIG -----------
 fs = 16000
 chunk = 0.2
 sd.default.device = (5, 5)
