@@ -1,17 +1,17 @@
-import sounddevice as sd
-import numpy as np
-import whisper
+#import sounddevice as sd
+#import numpy as np
+#import whisper
 import requests
 import subprocess
 import time
-from pynput import keyboard
+#from pynput import keyboard
 import select
 
 # ---------- CONFIG -----------
-fs = 16000
-chunk = 0.2
-sd.default.device = (5, 5)
-model = whisper.load_model("base")
+#fs = 16000
+#chunk = 0.2
+#sd.default.device = (5, 5)
+#model = whisper.load_model("base")
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "llama3.2"
@@ -19,36 +19,36 @@ MODEL = "llama3.2"
 
 
 # ---------- KEY STATE ----------
-recording = False
+#recording = False
 
-def on_press(key):
-    global recording
-    if key == keyboard.Key.ctrl_r:
-        recording = True
+#def on_press(key):
+#    global recording
+#    if key == keyboard.Key.ctrl_r:
+#        recording = True
 
-def on_release(key):
-    global recording
-    if key == keyboard.Key.ctrl_r:
-        recording = False
+#def on_release(key):
+#    global recording
+#    if key == keyboard.Key.ctrl_r:
+#        recording = False
 
-keyboard.Listener(on_press=on_press, on_release=on_release).start()
+#keyboard.Listener(on_press=on_press, on_release=on_release).start()
 
 # ---------- AUDIO ----------
-def record():
-    buf = []
+#def record():
+#    buf = []
 
-    while not recording:
-        time.sleep(0.05)
+#    while not recording:
+#        time.sleep(0.05)
 
-    while recording:
-        audio = sd.rec(int(chunk * fs), samplerate=fs, channels=1, dtype="float32")
-        sd.wait()
-        buf.append(np.squeeze(audio))
+#    while recording:
+#        audio = sd.rec(int(chunk * fs), samplerate=fs, channels=1, dtype="float32")
+#        sd.wait()
+#        buf.append(np.squeeze(audio))
 
-    return np.concatenate(buf) if buf else None
+#    return np.concatenate(buf) if buf else None
 
-def transcribe(audio):
-    return model.transcribe(audio, fp16=False)["text"].strip()
+#def transcribe(audio):
+#    return model.transcribe(audio, fp16=False)["text"].strip()
 
 # ---------- LLM ----------
 def generate(req, prompt):
